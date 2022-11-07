@@ -1,6 +1,8 @@
 import java.io.Serializable;
 
 public class Student implements  Serializable {
+    public static Long INDEX = Long.valueOf(0);
+
     private int id;
 
     private String name;
@@ -20,8 +22,8 @@ public class Student implements  Serializable {
     public Student() {
     }
 
-    public Student(int id, String name, int age, String address,float gpaMaths,float gpaPhysics,float gpaChemistry) {
-        this.id = id;
+    public Student( String name, int age, String address,float gpaMaths,float gpaPhysics,float gpaChemistry) {
+        this.id = Integer.parseInt(String.valueOf(++INDEX));
         this.name = name;
         this.age = age;
         this.address = address;

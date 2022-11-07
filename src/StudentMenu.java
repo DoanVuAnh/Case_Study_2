@@ -15,7 +15,8 @@ public class StudentMenu {
             System.out.println("3. Delete student by id.");
             System.out.println("4. Sort student by gpa.");
             System.out.println("5. Sort student by name.");
-            System.out.println("6. Display student.");
+            System.out.println("6. Display student by name.");
+            System.out.println("7. Display student.");
             System.out.println("0. Exit.");
             System.out.println("---------------------------");
             System.out.print("Please choose: ");
@@ -43,6 +44,9 @@ public class StudentMenu {
                     studentManager.displayListStudent();
                     break;
                 case "6":
+                    studentManager.displayByName();
+                    break;
+                case "7":
                     studentManager.displayListStudent();
                     break;
                 case "0":

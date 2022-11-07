@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import static sun.security.pkcs11.wrapper.Functions.getId;
+
 public class StudentManager implements Serializable {
     public static Scanner scanner = new Scanner(System.in);
     private List<Student> studentList;
@@ -14,11 +16,13 @@ public class StudentManager implements Serializable {
         studentList = new ArrayList<>();
         studentDao = new StudentDao();
         studentList = studentDao.read();
+        resetStaticINDEX();
+
     }
 
     public void addStudent() {
-        int id = (studentList.size() > 0) ? (studentList.size() + 1) : 1;
-        System.out.println("student id = " + id);
+//        int id = (studentList.size() > 0) ? (studentList.size() + 1) : 1;
+        System.out.println("student id = " );
         String name = inputName();
         int age = inputAge();
         String address = inputAddress();
@@ -26,7 +30,7 @@ public class StudentManager implements Serializable {
         float gpaPhysics = inputGpaPhysics();
         float gpaChemistry = inputGpaChemistry();
 //        float gpa = inputGpa();
-        studentList.add(new Student(id, name, age, address,gpaMaths,gpaPhysics,gpaChemistry));
+        studentList.add(new Student(name, age, address,gpaMaths,gpaPhysics,gpaChemistry));
         studentDao.write(studentList);
     }
 
@@ -87,6 +91,21 @@ public class StudentManager implements Serializable {
         Collections.sort(studentList, new SortStudentByName());
     }
 
+    public void displayByName(){
+        System.out.println("Enter character you want search: ");
+        String search = scanner.nextLine();
+
+        int count = 0;
+        for (Student s : studentList){
+            if (s.getName().contains(search)){
+                System.out.println("List student have name contains: ");
+                System.out.println(s);
+                count ++;
+            }
+        } if (count == 0){
+            System.out.println("No student's name on the list");
+        }
+    }
     public void displayListStudent() {
         System.out.printf("%10s | ","ID");
         System.out.printf("%20s | ","Name");
@@ -195,6 +214,12 @@ public class StudentManager implements Serializable {
             } catch (NumberFormatException ex) {
                 System.out.print("invalid! Input student gpa again: ");
             }
+        }
+    }
+
+    private void resetStaticINDEX(){
+        if(!studentList.isEmpty()){
+            Student.INDEX = Long.valueOf(studentList.get(studentList.size()-1).getId());
         }
     }
 
