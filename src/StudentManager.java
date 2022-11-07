@@ -39,9 +39,9 @@ public class StudentManager implements Serializable {
                 studentList.get(i).setName(inputName());
                 studentList.get(i).setAge(inputAge());
                 studentList.get(i).setAddress(inputAddress());
-                studentList.get(i).getGpaMaths();
-                studentList.get(i).getGpaPhysics();
-                studentList.get(i).getGpaChemistry();
+                studentList.get(i).setGpaMaths(inputGpaMaths());
+                studentList.get(i).setGpaPhysics(inputGpaPhysics());
+                studentList.get(i).setGpaChemistry(inputGpaChemistry());
                 studentList.get(i).setupGPA();
                 studentList.get(i).setupRank();
                 break;
