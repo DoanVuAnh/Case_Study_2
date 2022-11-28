@@ -1,15 +1,17 @@
+package account;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDao {
-    private static final String STUDENT_FILE_NAME = "src/Student";
+public class AccountDao {
+    private static final String ACCOUNT_FILE_NAME = "src/account/Account.txt";
 
-    public void write(List<Student> studentList){
+    public void write(List<Account> studentList){
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try{
-            fos = new FileOutputStream(new File(STUDENT_FILE_NAME));
+            fos = new FileOutputStream(new File(ACCOUNT_FILE_NAME));
             oos = new ObjectOutputStream(fos);
             oos.writeObject(studentList);
         } catch (FileNotFoundException e){
@@ -22,14 +24,14 @@ public class StudentDao {
         }
     }
 
-    public List<Student> read(){
-        List<Student> studentList = new ArrayList<>();
+    public List<Account> read(){
+        List<Account> studentList = new ArrayList<>();
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         try {
-            fis = new FileInputStream(new File(STUDENT_FILE_NAME));
+            fis = new FileInputStream(new File(ACCOUNT_FILE_NAME));
             ois = new ObjectInputStream(fis);
-            studentList = (List<Student>) ois.readObject();
+            studentList = (List<Account>) ois.readObject();
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }catch (EOFException e){
@@ -65,5 +67,4 @@ public class StudentDao {
             }
         }
     }
-
 }

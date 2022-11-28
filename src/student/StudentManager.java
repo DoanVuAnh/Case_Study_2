@@ -1,16 +1,14 @@
+package student;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-
-import static sun.security.pkcs11.wrapper.Functions.getId;
 
 public class StudentManager implements Serializable {
     public static Scanner scanner = new Scanner(System.in);
     private List<Student> studentList;
-    private StudentDao studentDao;
+    private final StudentDao studentDao;
 
     public StudentManager() {
         studentList = new ArrayList<>();
@@ -21,20 +19,21 @@ public class StudentManager implements Serializable {
     }
 
     public void addStudent() {
-//        int id = (studentList.size() > 0) ? (studentList.size() + 1) : 1;
-        System.out.println("student id = " );
         String name = inputName();
         int age = inputAge();
         String address = inputAddress();
         float gpaMaths = inputGpaMaths();
         float gpaPhysics = inputGpaPhysics();
         float gpaChemistry = inputGpaChemistry();
-//        float gpa = inputGpa();
         studentList.add(new Student(name, age, address,gpaMaths,gpaPhysics,gpaChemistry));
         studentDao.write(studentList);
     }
 
     public void editStudent(int id) {
+//        System.out.println("Student's old information");
+//        System.out.println(studentList.get(id).toString());
+
+        System.out.println("Student's new information");
         boolean isExisted = false;
         int size = studentList.size();
         for (int i = 0; i < size; i++) {
@@ -61,9 +60,9 @@ public class StudentManager implements Serializable {
     public void deleteStudent(int id) {
         Student student = null;
         int size = studentList.size();
-        for (int i = 0; i < size; i++) {
-            if (studentList.get(i).getId() == id) {
-                student = studentList.get(i);
+        for (Student value : studentList) {
+            if (value.getId() == id) {
+                student = value;
                 break;
             }
         }
@@ -77,26 +76,26 @@ public class StudentManager implements Serializable {
 
     public void sortStudentByGPA(int choice) {
         if (choice == 1) {
-            Collections.sort(studentList, new SortStudentGetSmallerByGPA());
+            studentList.sort(new SortStudentGetSmallerByGPA());
             displayListStudent();
         }
         if (choice == 2){
-            Collections.sort(studentList, new SortStudentGetBiggerByGPA());
+            studentList.sort(new SortStudentGetBiggerByGPA());
             displayListStudent();
         }
         }
 
 
     public void sortStudentByName() {
-        Collections.sort(studentList, new SortStudentByName());
+        studentList.sort(new SortStudentByName());
     }
 
     public void displayByName(){
         System.out.println("Enter character you want search: ");
-        String search = scanner.nextLine();
+                String search = scanner.nextLine();
 
-        int count = 0;
-        for (Student s : studentList){
+                int count = 0;
+                for (Student s : studentList){
             if (s.getName().contains(search)){
                 System.out.println("List student have name contains: ");
                 System.out.println(s);

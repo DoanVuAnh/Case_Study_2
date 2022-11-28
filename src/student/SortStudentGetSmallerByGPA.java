@@ -1,3 +1,5 @@
+package student;
+
 import java.util.Comparator;
 
 public class SortStudentGetSmallerByGPA implements Comparator<Student> {
@@ -8,5 +10,4 @@ public class SortStudentGetSmallerByGPA implements Comparator<Student> {
         }
         return -1;
     }
-
 }

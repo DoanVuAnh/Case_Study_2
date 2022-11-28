@@ -1,3 +1,5 @@
+package student;
+
 import java.util.Comparator;
 
 public class SortStudentByName implements Comparator<Student> {
